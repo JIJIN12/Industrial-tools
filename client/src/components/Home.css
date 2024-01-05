@@ -1,0 +1,5 @@
+.category_hover:hover {
+  border-width: 0 3px 3px 0;
+  border-color: #90a4ae; /* You can customize the color */
+  transform: rotate(-45deg);
+}
