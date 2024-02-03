@@ -3,3 +3,58 @@
   border-color: #90a4ae; /* You can customize the color */
   transform: rotate(-45deg);
 }
+.discount {
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+}
+.discount:hover {
+  border-top: 3px solid;
+  border-color: red;
+  color: red;
+}
+
+@media screen and (max-width: 1020px) {
+  .offers {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .image {
+    height: 100%;
+  }
+}
+@media screen and (max-width: 321px)  {
+  .offers {
+    background-color: aqua;
+    height: 200px;
+    justify-content: center;
+  }
+  .category,
+  .discount {
+    width: 200px;
+    font-size: 0.5rem;
+  }
+
+  .image {
+    height: max-content;
+  }
+}
+@media screen and (max-width: 429px) {
+  .offers {
+    background-color: aqua;
+    height: 150px;
+    justify-content: center;
+  }
+  .category
+   {
+    width: 200px;
+    font-size: 0.5rem;
+  }
+  
+
+  .image {
+    height: 100px;
+  }
+}
