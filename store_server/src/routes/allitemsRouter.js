@@ -3,6 +3,8 @@ const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const allitems_model = require("../model/allitems");
+const cartmodel = require("../model/cartModel");
+const cartRouter = require("./cartRouter");
 const allitemsRouter = express.Router();
 
 cloudinary.config({

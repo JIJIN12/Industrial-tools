@@ -6,6 +6,7 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { allitemdetails } from "../components/redux/slice/shopcategoryslice";
+import { ShpContext } from "../components/context/ShpContext";
 
 export default function ShopCategory() {
   const dispatch = useDispatch();

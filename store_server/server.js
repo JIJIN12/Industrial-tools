@@ -4,6 +4,7 @@ const bodyparser = require("body-parser");
 const popularRouter = require("./src/routes/popularRouter");
 const newcollectionRouter = require("./src/routes/NewcollectionRouter");
 const allitemsRouter = require("./src/routes/allitemsRouter");
+const cartRouter = require("./src/routes/cartRouter");
 const app = express();
 
 // app.use(bodyparser())
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
 app.use("/popular", popularRouter);
 app.use("/newcollection", newcollectionRouter);
 app.use("/allitems", allitemsRouter);
+app.use("/cart", cartRouter);
 
 const url =
   "mongodb+srv://jijinsuresh6:jijinsuresh6@cluster0.dh7smys.mongodb.net/TOOLS_SERVER?retryWrites=true&w=majority";
