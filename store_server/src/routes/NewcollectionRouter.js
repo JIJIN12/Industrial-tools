@@ -43,6 +43,7 @@ newcollectionRouter.post(
       const data = {
         image: req.file ? req.file.path : null,
         popular_name: req.body.popular_name,
+        description: req.body?req.body.description:null,
         new_price: req.body.new_price,
         old_price: req.body.old_price,
       };

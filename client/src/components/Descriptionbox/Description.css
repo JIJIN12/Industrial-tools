@@ -1,0 +1,24 @@
+@media (max-width: 1280px) {
+  .description-box {
+    margin: 60px;
+  }
+}
+@media (max-width: 800px) {
+  .description-box {
+    margin: 60px 20px;
+  }
+  .description-box-description {
+    font-size: 14px;
+  }
+}
+@media (max-width: 500px) {
+  .description-box {
+    margin: 20px;
+    width: 100%;
+  }
+  .description-box-description {
+    padding: 23px;
+    font-size: 14px;
+    width: 100%;
+  }
+}

@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
+import './Cartitems.css'
 export default function Cartitems() {
   const [cartitems, set_cartitems] = useState([]);
-  const [carttotal, set_carttotal] = useState(0);
+  const [carttotal, set_carttotal] = useState([]);
   console.log(carttotal);
-  console.log(cartitems);
+  console.log(cartitems.length);
   
 ;
   
@@ -62,9 +62,18 @@ useEffect(() => {
       });
   };
 
+  const removecart= async(id)=>{
+    await axios.post(`http://localhost:1000/cart/delete/${id}`).then((Response)=>{
+      console.log(Response.data.details);
+      updateCartData();
+    }).catch((error)=>{
+      console.log(error);
+    })
+  }
+
   return (
-    <div className="mx-[170px] my-[100px]">
-      <div className="grid grid-cols-6 items-center gap-[75px] px-[0] py-[20px] text-[#454545] text-[18px] font-semibold">
+    <div className="caritems mx-[120px] my-[100px]">
+      <div className="cartitems-title grid grid-cols-6 items-center gap-[75px] px-[0] py-[20px] text-[#454545] text-[18px] font-semibold">
         <p className="col-span-1">Products</p>
         <p className="col-span-1">Title</p>
         <p className="col-span-1">Price</p>
@@ -75,15 +84,15 @@ useEffect(() => {
       <hr className="h-[3px] bg-[#c6c4c4] border-0" />
       {cartitems.map((data, key) => (
         <div className="">
-          <div className="grid grid-cols-6 items-center gap-[75px] px-[0] py-[20px] text-[#454545] text-[18px] font-semibold">
-            <img src={data.image} className="w-19" />
-            {/* <p>{data.popular_name ? `${data.popular_name.substring(0, 20)}...` : data.popular_name}</p> */}
-            <p>{data.popular_name}</p>
+          <div className="cartitems-product grid grid-cols-6 items-center gap-[75px] px-[0]  text-[#454545] text-[14px] font-semibold">
+            <img src={data.image} className=" cartitems-product-img  w-[60px]" />
+            <p>{data.popular_name ? `${data.popular_name.substring(0, 20)}...` : data.popular_name}</p>
+            {/* <p>{data.popular_name}</p> */}
             <p>{data.new_price}</p>
             {/* <button className="">{data.quantity}</button> */}
-            <div className="flex justify-start  h-fit">
+            <div className="cartitem-number flex justify-start  h-fit">
               <button
-                className="border-2 border-r-0 border-slate-200 p-3 bg-slate-300 "
+                className="cartitem-decre border-2 border-r-0 border-slate-200 p-3 bg-slate-300 "
                 onClick={() => {
                   decrement(data._id);
                   // Update local state for the decremented item
@@ -107,7 +116,7 @@ useEffect(() => {
                 className="border-2 border-slate-200 w-9 pl-3"
               />
               <button
-                className="border-2 border-l-0 border-slate-200 p-2 bg-slate-300 "
+                className="cartitem-incre border-2 border-l-0 border-slate-200 p-3 bg-slate-300 "
                 onClick={() => {
                   increment(data._id);
                   // Update local state for the incremented item
@@ -123,36 +132,36 @@ useEffect(() => {
                 +
               </button>
             </div>
-            <p>{carttotal}</p>
-            <img src="" />
+            <p>${data.quantity * Number(data.new_price.replace(/[^0-9.]/g, ""))}</p>
+            <img src="./images/delete (1).png" className="cartitem-removeicon" onClick={()=>{removecart(data._id)}}/>
           </div>
           <hr />
         </div>
       ))}
-      <div className="flex my-[100px]">
-        <div className="flex-1 flex flex-col mr-[200px] gap-[40px]">
+      <div className="cartitems-cart-details flex my-[100px]">
+        <div className="cartitems-carttotal flex-1 flex flex-col mr-[200px] gap-[20px]">
           <h1>Cart Totals</h1>
-          <div>
-            <h1>Subtotal</h1>
-            <p>${0}</p>
+          <div className="flex justify-between px-[20px]">
+            <p>Subtotal</p>
+            <p>${carttotal}</p>
           </div>
           <hr />
-          <div className="flex justify-between py-[15px]">
+          <div className="cartitems-fee flex justify-between px-[16px] ">
             <p>Shipping fee</p>
             <p>FREE</p>
           </div>
           <hr />
-          <div className="flex justify-between py-[15px]">
+          <div className="cartitems-total flex justify-between px-[15px]">
             <h3>Total</h3>
-            <h3>${0}</h3>
+            <h3>${carttotal}</h3>
           </div>
           <button className="w-[262px] h-[58px] outline-none border-none bg-[#ff5a5a] text-[#fff] text-[16px] font-semibold">
             PROCEED TO CHECKOUT
           </button>
         </div>
-        <div className="flex-1 text-[16px] font-semibold">
+        <div className="cartitems-promocode flex-1 text-[16px] font-semibold">
           <p className="text-[#555]">If you have a promo code,Enter it here</p>
-          <div className="flex w-[504px] mt-[15px] pl-[20px] h-[58px] bg-[#eaeaea]">
+          <div className="cartitems-input flex w-[504px] mt-[15px] pl-[20px] h-[58px] bg-[#eaeaea]">
             <input
               className="border-none outline-none bg-transparent text-[16px] w-[330px] h-[50px]"
               type="text"

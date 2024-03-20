@@ -7,6 +7,8 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { allitemdetails } from "../components/redux/slice/shopcategoryslice";
 import { ShpContext } from "../components/context/ShpContext";
+import NewColllection from "../components/new collection/NewColllection";
+import NewsLetter from "../components/NewsLetter/NewsLetter";
 
 export default function ShopCategory() {
   const dispatch = useDispatch();
@@ -71,11 +73,11 @@ export default function ShopCategory() {
           </div>
         </div>
 
-        <div className="shopcategory-products mx-36 my-3 grid grid-cols-4 gap-y-[80px]">
+        <div className="shopcategory-products mx-[8rem] my-3 flex flex-rows flex-wrap gap-[20px] ">
           {/* flex flex-wrap gap-[1rem] w-full pb-10  */}
           {updatedata.map((data, key) => (
             <div className="flex flex-col w-fit ">
-              <div className="rounded-md w-[12rem]  m-2 border-2 border-slate h-[28rem] pb-2">
+              <div className="rounded-md w-[12rem]  m-2 border-2 border-slate h-[25rem] pb-2 ">
                 <Link to={`/product/${data._id}`}>
                   <img
                     src={data.image}
@@ -85,7 +87,7 @@ export default function ShopCategory() {
                 </Link>
 
                 <div className="pl-3 pr-1">
-                  <p className="text-xs pt-3">{data.popular_name}</p>
+                  <p className="text-xs pt-3">{data.popular_name?`${data.popular_name.substring(0,60)}...`:" "}</p>
                   <div className="">
                     <p>
                       <b>RS {data.new_price}</b>
@@ -100,10 +102,13 @@ export default function ShopCategory() {
             </div>
           ))}
         </div>
-        <div className="flex justify-center items-center mx-auto my-[90px] w-[233px] h-[69px] rounded-[75px] bg-[#ededed] text-[#787878] text-base font-medium">
+        <div className="shopcategory-loadmore flex justify-center items-center mx-auto my-[90px] w-[233px] h-[69px] rounded-[75px] bg-[#ededed] text-[#787878] text-base font-medium">
           Explore more
         </div>
       </div>
+      <NewColllection />
+      <NewsLetter />
     </>
+
   );
 }
