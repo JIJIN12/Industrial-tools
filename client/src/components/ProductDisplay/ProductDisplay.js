@@ -44,31 +44,31 @@ export default function ProductDisplay(props1) {
   // }
   return (
     <>
-      <div className="productdisplay flex mx-[170px]">
-        <div className="productdisplay-left  flex gap-3 ">
+      <div className="productdisplay flex mx-[170px] gap-0">
+        <div className="productdisplay-left  flex gap-3 border-r-2 border-slate-200 bg-white">
           <div className="productdisplay-img-list flex flex-col gap-[20px] ">
             <img
               src={product.image}
-              className="h-[140px] p-2 border-1 border-slate-600"
+              className="h-[140px] p-2 border-1 border-slate-200"
             />
             <img
               src={product.image}
-              className="h-[140px] p-2 border-1 border-slate-600"
+              className="h-[140px] p-2 border-1 border-slate-200"
             />
             <img
               src={product.image}
-              className="h-[130px] p-2 border-1 border-slate-600"
+              className="h-[130px] p-2 border-1 border-slate-200"
             />
             <img
               src={product.image}
-              className="h-[130px] p-2 border-1 border-slate-600"
+              className="h-[130px] p-2 border-1 border-slate-200"
             />
           </div>
-          <div className="productdisplay-main-img w-[590px] h-[600px] border-1 border-slate-600">
+          <div className="productdisplay-main-img w-[590px] h-[600px] ">
             <img src={product.image} className="h-full p-4" />
           </div>
         </div>
-        <div className="productdisplay-right mx-[60px] flex flex-col">
+        <div className="productdisplay-right mx-[60px] flex flex-col p-5 rounded-lg border-2 border-slate-200 bg-white">
           <h1 className="text-[#3d3d3d] text-[20px] font-bold">
             {product.popular_name}
           </h1>

@@ -24,7 +24,7 @@ export default function Nav() {
   return (
     <div className="navbar">
       <div className="nav-logo">
-        <img src="./images/discount1.jpg " className="w-[10rem]" />
+        <img src="./images/discount1.jpg " className="w-[5rem]" />
         <p>SHOPPER</p>
       </div>
       <img src={menuimg} onClick={dropdown_toggle} className="nav-dropdown" />
