@@ -3,29 +3,50 @@
   border-color: #90a4ae; /* You can customize the color */
   transform: rotate(-45deg);
 }
-.discount {
+.home-discount {
+ 
   font-size: 13px;
   display: flex;
   justify-content: center;
 }
-.discount:hover {
+.home-discount:hover {
   border-top: 3px solid;
   border-color: red;
   color: red;
 }
 
-@media screen and (max-width: 1020px) {
+p{
+  margin-top: 0;
+  margin-bottom: 0
+}
+@media screen and (max-width: 1284px) {
+  .home-category{
+    width: 30%;
+  }
   .offers {
     height: 100px;
     display: flex;
     justify-content: center;
   }
-
   .image {
     height: 100%;
   }
 }
-@media screen and (max-width: 321px)  {
+@media screen and (max-width: 1020px) {
+  .home-category{
+    width: 40%;
+  }
+  .offers {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+  }
+  .image {
+    height: 100%;
+  }
+}
+@media screen and (max-width: 800px)  {
+  
   .offers {
     background-color: aqua;
     height: 200px;
@@ -41,20 +62,21 @@
     height: max-content;
   }
 }
-@media screen and (max-width: 429px) {
-  .offers {
-    background-color: aqua;
-    height: 150px;
-    justify-content: center;
+/* @media screen and (max-width: 500px) {
+  .home-category{
+    min-width: 130px;
+    width: 30%;
   }
-  .category
-   {
-    width: 200px;
-    font-size: 0.5rem;
+  .home-category div{
+   font-size: 7px;
   }
-  
-
-  .image {
-    height: 100px;
+  .home-slider-div{
+    width: 100%;
   }
-}
+  .home-slider{
+    height: 30vh;
+  }
+  .home-slider img{
+    height: 30vh;
+  }
+} */

@@ -69,8 +69,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: -35px;
-  margin-left: -55px;
+  margin-top: -28px;
+  margin-left: -65px;
   border-radius: 11px;
   font-size: 14px;
   background: red;
@@ -103,7 +103,7 @@
   }
   .nav-cart-count {
     
-    margin-left: -60px;
+    margin-left: -65px;
     font-size: 12px;
   }
 }

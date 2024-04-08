@@ -1,254 +1,323 @@
 import React, { useState } from "react";
 import "./Home.css";
-import swiper from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
-import "swiper/swiper-bundle.css";
-import { Carousel, Card } from 'react-bootstrap';
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
+import Carousel from "react-material-ui-carousel";
+import { Paper, Button } from "@mui/material";
 
 export default function Home() {
-  
-    const [index, setIndex] = useState(0);
-  
-    const handleSelect = (selectedIndex, e) => {
-      setIndex(selectedIndex);
-    };
+  const [showItem1Items, setShowItem1Items] = useState(false);
+  const [showOtherItems, setShowOtherItems] = useState(false);
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const items = [
+    {
+      name: "Image 1",
+      description: "Description 1",
+      image: "./images/storebanner.jpeg",
+    },
+    {
+      name: "Image 2",
+      description: "Description 2",
+      image: "./images/discount1.jpg",
+    },
+    {
+      name: "Image 3",
+      description: "Description 3",
+      image: "./images/toolsbanner.jpg",
+    },
+    {
+      name: "Image 4",
+      description: "Description 4",
+      image: "./images/discount2.jpg",
+    },
+    {
+      name: "Image 5",
+      description: "Description 4",
+      image: "./images/discount3.jpg",
+    },
+  ];
+  const handleIndicatorClick = (index) => {
+    setActiveIndex(index);
+  };
+
+  const handleButtonClick = (index) => {
+    // Add your button action here, for example:
+    console.log(`Button ${index + 1} clicked!`);
+  };
+
+  const home_data = [
+    { name: "WINTER ASSORTMENT", offer: "Upto 300 OFF", num: 0 },
+    { name: "AHUJA", offer: "Shop Now", num: 1 },
+    { name: "EAGLE", offer: "Upto 70% OFF", num: 2 },
+    { name: "SAFETY SHOES", offer: "Upto 70% OFF", num: 3 },
+    { name: "CANDES", offer: "Upto 50% OFF", num: 4 },
+  ];
+ 
+  const handleItem1HoverEnter = () => {
+    setShowItem1Items(true);
+    setShowOtherItems(false);
+  };
+
+  const handleAdditionalItemHoverEnter = (index) => {
+    // Show only the hovered additional item
+    setShowOtherItems(index);
+  };
+
+  const handleItemHoverEnter = () => {
+    setShowOtherItems(false);
+  };
+
+  const handleItemHoverLeave = () => {
+    setShowItem1Items(false);
+    setShowOtherItems(false);
+  };
   return (
     <>
-      <div className="flex justify-around">
-        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid border-2 h-[100vh]  ">
-          <div className="category rounded-lg border-2 border-black-200 text-lg m-2 col-start-1 col-end-2  grid 2xl:min-w-[100px]  md:min-w-[200px] sm:min-w-[100px] ">
-            <div className="pl-4 pt-4 hover:bg-slate-100">
-              <p>Office Stationery & Supplies</p>
+      <div className=" bg-slate-100 mt-[-10px]">
+        <div className="flex flex-row ml-[5px] mr-[5px] mt-[10px] mb-[5px] w-[100%] h-[100%] min-w-[300px] ">
+        <div className="home-category bg-white rounded-xl border-2 border-black-200 m-2 w-[22%] h-[100%] min-w-[250px] relative">
+            <div
+              className="pl-[10px] pb-[10px] pt-[15px] pr-[25px] text-[1rem] hover:bg-slate-100"
+              onMouseEnter={handleItem1HoverEnter}
+              onMouseLeave={handleItemHoverLeave}
+            >
+              <p>Main Item</p>
             </div>
-            <div className="pl-4  hover:bg-slate-300">
-              <p>Office Stationery & Supplies</p>
-            </div>
-            <div className="pl-4 hover:bg-slate-300">
-              <p>Office Stationery & Supplies</p>
-            </div>
-            <div className="pl-4 hover:bg-slate-300">
-              <p>Office Stationery & Supplies</p>
-            </div>
-            <div className="pl-4 hover:bg-slate-300">
-              <p>Office Stationery & Supplies</p>
-            </div>
-            <div className="pl-4 hover:bg-slate-300">
-              <p>Office Stationery & Supplies</p>
-            </div>
-            <div className="pl-4 hover:bg-slate-300">
-              <p>Office Stationery & Supplies</p>
-            </div>
-            <div className="pl-4 hover:bg-slate-300">
-              <p>Office Stationery & Supplies</p>
-            </div>
-            <div className="pl-4 hover:bg-slate-300">
-              <p>Office Stationery & Supplies</p>
-            </div>
-            <div className="pl-4 hover:bg-slate-300">
-              <p>Office Stationery & Supplies</p>
-            </div>
-            <div className="pl-4 hover:bg-slate-300">
-              <p>Office Stationery & Supplies</p>
-            </div>
+
+            {showItem1Items && (
+              <div
+                className="absolute bg-white rounded-xl border-2 border-black-200 pl-[10px] pb-[10px] pt-[15px] pr-[25px] text-[1rem]"
+                onMouseEnter={handleItem1HoverEnter}
+                onMouseLeave={handleItemHoverLeave}
+                style={{
+                  zIndex: 20,
+                  maxWidth: "250px",
+                  overflow: "hidden",
+                  top: 0,
+                  left: "calc(100% + 2px)",
+                }}
+              >
+                <div className="w-[15rem]">
+                  {[...Array(5)].map((_, index) => (
+                    <div
+                      key={index}
+                      className="pl-[10px] pb-[10px] pt-[15px] pr-[25px] text-[1rem] hover:bg-slate-100"
+                      onMouseEnter={handleAdditionalItemHoverEnter} // Use the same hover handler for all additional items
+                      onMouseLeave={handleItemHoverLeave}
+                      style={{ top: `${index * 40}px` }} // Adjust the height dynamically
+                    >
+                      <p>Additional Item {index + 1}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {showOtherItems && (
+              <div
+                className="absolute bg-white rounded-xl border-2 border-black-200 pl-[10px] pb-[10px] pt-[15px] pr-[25px] text-[1rem]"
+                onMouseEnter={handleAdditionalItemHoverEnter}
+                onMouseLeave={handleItemHoverLeave}
+                style={{
+                  zIndex: 20,
+                  maxWidth: "250px",
+                  overflow: "hidden",
+                  top: 0,
+                  left: "calc(100% + 16rem)",
+                }}
+              >
+                <div className="w-[15rem]">
+                  {[...Array(5)].map((_, index) => (
+                    <div
+                      key={index}
+                      className="pl-[10px] pb-[10px] pt-[15px] pr-[25px] text-[1rem] hover:bg-slate-100"
+                      onMouseEnter={handleAdditionalItemHoverEnter}
+                      onMouseLeave={handleItemHoverLeave}
+                      style={{ top: `${index * 40}px` }} // Adjust the height dynamically
+                    >
+                      <p>Other Item {index + 1}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+<div
+              className="pl-[10px] pb-[10px] pt-[15px] pr-[25px] text-[1rem] hover:bg-slate-100"
+              onMouseEnter={handleItem1HoverEnter}
+              onMouseLeave={handleItemHoverLeave}
+            >
+              <p>Main Item</p>
+            </div> <div
+              className="pl-[10px] pb-[10px] pt-[15px] pr-[25px] text-[1rem] hover:bg-slate-100"
+              onMouseEnter={handleItem1HoverEnter}
+              onMouseLeave={handleItemHoverLeave}
+            >
+              <p>Main Item</p>
+            </div> <div
+              className="pl-[10px] pb-[10px] pt-[15px] pr-[25px] text-[1rem] hover:bg-slate-100"
+              onMouseEnter={handleItem1HoverEnter}
+              onMouseLeave={handleItemHoverLeave}
+            >
+              <p>Main Item</p>
+            </div> <div
+              className="pl-[10px] pb-[10px] pt-[15px] pr-[25px] text-[1rem] hover:bg-slate-100"
+              onMouseEnter={handleItem1HoverEnter}
+              onMouseLeave={handleItemHoverLeave}
+            >
+              <p>Main Item</p>
+            </div> <div
+              className="pl-[10px] pb-[10px] pt-[15px] pr-[25px] text-[1rem] hover:bg-slate-100"
+              onMouseEnter={handleItem1HoverEnter}
+              onMouseLeave={handleItemHoverLeave}
+            >
+              <p>Main Item</p>
+            </div> <div
+              className="pl-[10px] pb-[10px] pt-[15px] pr-[25px] text-[1rem] hover:bg-slate-100"
+              onMouseEnter={handleItem1HoverEnter}
+              onMouseLeave={handleItemHoverLeave}
+            >
+              <p>Main Item</p>
+            </div> <div
+              className="pl-[10px] pb-[10px] pt-[15px] pr-[25px] text-[1rem] hover:bg-slate-100"
+              onMouseEnter={handleItem1HoverEnter}
+              onMouseLeave={handleItemHoverLeave}
+            >
+              <p>Main Item</p>
+            </div> 
           </div>
 
-          <div className="rounded-lg border-2 border-black-200  m-2 col-start-2 col-end-5 row-start-1 h-[100vh]  ">
-            <div className="grid h-[100vh] div2">
-              <div className="rows-start-1 max-h-lvh">
-                <div className="h-3/5">
-                  <img
-                    src="/images/google.jpeg"
-                    className=" w-full h-full max-h-lvh"
-                  />
-                </div>
-                <div className="    grid grid-cols-5 h-fit ">
-                  <div className="rounded-sm discount text-sm/6 p-2 border-r-2">
-                    <p>
-                      WINTER ASSORTMENT<p>Upto 300 OFF</p>
-                    </p>
-                  </div>
-                  <div className="rounded-sm discount text-sm/6 p-2 border-r-2">
-                    <p>
-                      AHUJA <p>Shop Now</p>
-                    </p>
-                  </div>
-                  <div className="rounded-sm discount text-sm/6 p-2 border-r-2">
-                    <p>
-                      EAGLE<p>Upto 70% OFF</p>
-                    </p>
-                  </div>
-                  <div className="rounded-sm discount text-sm/6 p-2 border-r-2">
-                    <p>
-                      SAFETY SHOES<p>Upto 70% OFF</p>
-                    </p>
-                  </div>
-                  <div className="rounded-sm discount text-sm/6 p-2 ">
-                    <p>
-                      CANDES<p>Upto 50% OFF</p>
-                    </p>
-                  </div>
-                </div>
-                <div className="offers grid grid-cols-3  border-2 border-black-200 h-fit ">
-                  <div className=" border-2 border-black-200 mt-2 col-start-1 col-end-2 row-start-4   ">
-                    <img
-                      src="/images/discount1.jpeg"
-                      className="image h-full  w-full rounded-lg "
-                    />
-                  </div>
-                  <div className=" rounded-md  mt-2 mr-1 ml-1 col-start-2 col-end-3 row-start-4">
-                    <img
-                      src="/images/discount1.jpg"
-                      className="image h-full w-full rounded-lg"
-                    />
-                  </div>
-                  <div className=" rounded-md mt-2  col-start-3 col-end-4 row-start-4">
-                    <img
-                      src="/images/discount2.jpeg"
-                      className="image h-full w-full rounded-lg"
-                    />
+          <div className="home-slider-div rounded-xl m-2 flex flex-col  w-[100%]">
+            <div className=" home-slider-div2 rounded-xl bg-white border-2 border-black-200  ">
+              <div className="h-fit">
+                <div className="home-slider h-[70%] w-[100%] "></div>
+                <div className=" flex flex-col justify-between gap-0 ">
+                  <Carousel
+                    autoPlay={true}
+                    animation="slide"
+                    interval={3000}
+                    cycleNavigation={true}
+                    timeout={500}
+                    swipe={true}
+                    indicators={false}
+                    navButtonsAlwaysVisible={false}
+                    className="w-full custom-carousel"
+                    index={activeIndex}
+                    onChange={(index) => setActiveIndex(index)}
+                  >
+                    {/* Carousel items */}
+                    {items.map((item, i) => (
+                      <Paper key={i}>
+                        <div className=" flex justify-center">
+                          <img
+                            src={item.image}
+                            className="w-full h-[300px] rounded-t-lg"
+                            alt={`Image ${i + 1}`}
+                          />
+                        </div>
+                      </Paper>
+                    ))}
+                  </Carousel>
+                  <div className="grid grid-cols-5">
+                    {home_data.map((data) => (
+                      <button
+                        key={data}
+                        className=" rounded-sm home-discount border-r-2 p-2  pr-4 "
+                        onClick={() => handleIndicatorClick(data.num)}
+                        onMouseEnter={() => setActiveIndex(data.num)}
+                      >
+                        {data.name}
+                        <br />
+                        {data.offer}
+                      </button>
+                    ))}
                   </div>
                 </div>
               </div>
             </div>
+
+            <div className=" h-[30%] flex justify-between gap-[5px]  mt-[10px] ">
+              <div className="">
+                <img
+                  src="./images/sub1.jpg"
+                  className=" rounded-xl w-[100%] h-[100%]  "
+                />
+              </div>
+              <div className="">
+                <img
+                  src="./images/sub2.jpg"
+                  className="rounded-xl w-[100%]  h-[100%]"
+                />
+              </div>
+              <div className="">
+                <img
+                  src="./images/sub3.jpeg"
+                  className="rounded-xl w-[100%]  h-[100%]"
+                />
+              </div>
+            </div>
           </div>
-          {/* <div className="border-2 border-black-200  m-2 col-start-2 col-end-5 row-start-1 row-end-3">
-          <img src="/images/google.jpeg" className="h-full w-full" />
-        </div>
-        <div className="border-2 border-black-200  m-2 col-start-2 col-end-5 row-start-3 row-end-3 grid grid-cols-5 h-fit">
-          <div className="border-2 border-black text-sm/6 p-2">
-            WINTER ASSORTMENT Upto 300 OFF
-          </div>
-          <div className="border-2 border-black text-sm/6 p-2">
-            AHUJA Shop Now
-          </div>
-          <div className="border-2 border-black text-sm/6 p-2">
-            EAGLE Upto 70% OFF
-          </div>
-          <div className="border-2 border-black text-sm/6 p-2">
-            SAFETY SHOES Upto 70% OFF
-          </div>
-          <div className="border-2 border-black text-sm/6 p-2 ">
-            CANDES Upto 50% OFF
-          </div>
-        </div> */}
         </div>
       </div>
+
       {/* <div>
-        <div className="wrapper bg-slate-500 mt-11">
-          <Swiper
-            className="Home_swiper"
-            spaceBetween={5}
-            slidesPerView={5}
-            navigation={{
-              nextEl: ".swiper-button-next",
-              prevEl: ".swiper-button-prev",
+        <h1>hhfhfhfh</h1>
+        <div className="border-2 mx-auto max-w-screen-xl border-black flex justify-center">
+          <Carousel
+            autoPlay={true}
+            animation="fade"
+            interval={1000}
+            timeout={1000}
+            className="w-full"
+            indicatorContainerProps={{
+              style: {
+                marginTop: "50px",
+                textAlign: "center",
+              },
             }}
-            pagination={{ clickable: true }}
-            scrollbar={{ draggable: true }}
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log("slide change")}
+            index={activeIndex}
+            onChange={(index) => setActiveIndex(index)}
           >
-            <SwiperSlide>
-              <a href="#" className="">
-                <img
-                  src="./images/discount1.jpg"
-                  className="home_img m-0"
-                  alt="Discount 1"
-                />
-              </a>
-            </SwiperSlide>
-            <SwiperSlide>
-              <a href="#" className="">
-                <img
-                  src="./images/discount1.jpg"
-                  className="home_img m-0"
-                  alt="Discount 1"
-                />
-              </a>
-            </SwiperSlide>
-            <SwiperSlide>
-              <a href="#" className="">
-                <img
-                  src="./images/discount1.jpg"
-                  className="home_img m-0"
-                  alt="Discount 1"
-                />
-              </a>
-            </SwiperSlide>
-            <SwiperSlide>
-              <a href="#" className="">
-                <img
-                  src="./images/discount1.jpg"
-                  className="home_img m-0"
-                  alt="Discount 1"
-                />
-              </a>
-            </SwiperSlide>
-            <SwiperSlide>
-              <a href="#" className="">
-                <img
-                  src="./images/discount1.jpg"
-                  className="home_img m-0"
-                  alt="Discount 1"
-                />
-              </a>
-            </SwiperSlide>
-            <SwiperSlide>
-              <a href="#" className="">
-                <img
-                  src="./images/discount1.jpg"
-                  className="home_img m-0"
-                  alt="Discount 1"
-                />
-              </a>
-            </SwiperSlide>
-            <SwiperSlide>
-              <a href="#" className="">
-                <img
-                  src="./images/discount1.jpg"
-                  className="home_img m-0"
-                  alt="Discount 1"
-                />
-              </a>
-            </SwiperSlide>
-            {/* Add more SwiperSlides as needed */}
-      {/* </Swiper>
-          <div className="swiper-button-next bg-black"></div>
-          <div className="swiper-button-prev bg-black border-black"></div>
-        </div> */}
-      {/* </div>  */}
-
-      <div><h1>hhfhfhfh</h1>
-        <Carousel activeIndex={index} onSelect={handleSelect}>
-          <Carousel.Item>
-            <Card className="h-2">
-              <Card.Body>
-                <Card.Img src="./images/discount1.jpeg"></Card.Img>
-                <Card.Title>jhjhfh</Card.Title>
-                <Card.Text>Content for card 1.</Card.Text>
-              </Card.Body>
-              
-            </Card>
-          </Carousel.Item>
-          <Carousel.Item>
-            <Card>
-              <Card.Body>
-              <Card.Img src="./images/discount2.jpeg"></Card.Img>
-
-                <Card.Title>Card 2</Card.Title>
-                <Card.Text>Content for card 2.</Card.Text>
-              </Card.Body>
-            </Card>
-          </Carousel.Item>
-          {/* Add more Carousel.Items with Card content as needed */}
-        </Carousel>
-      </div>
+            {items.map((item, i) => (
+              <Paper key={i}>
+                <div className=" flex justify-center">
+                  <img
+                    src={item.image}
+                    className="w-full h-[300px]"
+                    alt={`Image ${i + 1}`}
+                  />
+                </div>
+                <h2>{item.name}</h2>
+                <p>{item.description}</p>
+                <Button
+                  className="CheckButton"
+                  onClick={() => handleButtonClick(activeIndex)}
+                >
+                  Check it out!
+                </Button>
+              </Paper>
+            ))}
+          </Carousel>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            marginTop: "20px",
+          }}
+        >
+          {[0, 1, 2, 3].map((index) => (
+            <button
+              key={index}
+              className="p-4 py-2 font-medium hover:bg-slate-200 rounded-lg"
+              onClick={() => handleIndicatorClick(index)}
+            >
+              section{index}
+            </button>
+          ))}
+        </div>
+      </div> */}
     </>
   );
 }

@@ -22,9 +22,16 @@ export default function LoginSignup() {
         console.log(Response.data.Message);
 
         set_loginstore_data(Response.data);
+        const token = Response.data.token
         setOpen(true);
-        localStorage.setItem("token", Response.data.token);
-        localStorage.setItem("username", Response.data.username);
+
+        if(token){
+          localStorage.setItem("token", Response.data.token);
+          localStorage.setItem("username", Response.data.username);
+          window.location.href = '/';
+
+        }
+       
       });
     } catch (error) {
       console.log("error", error);

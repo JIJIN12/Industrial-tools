@@ -80,10 +80,6 @@ export default function Popular() {
               </div>
             </div>
           ))}
-
-          {/* // <Item key={i} id={Item.id} name={Item.name} new_price={Item.new_price} old_price ={Item.old_price}/> */}
-
-          {/* map items */}
         </div>
       </div>
     </div>
