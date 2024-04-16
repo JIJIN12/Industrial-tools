@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./CSS/ShopCategory.css";
 import Footer from "../components/Footer/Footer";
 import banner from "../components/Assets/images/banner1.jpg";
+import banner1 from "../components/Assets/images/storebanner.jpeg";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { allitemdetails } from "../components/redux/slice/shopcategoryslice";
 import { ShpContext } from "../components/context/ShpContext";
@@ -21,16 +22,11 @@ export default function ShopCategory() {
   const { category } = useParams(); // Destructure category from useParams
   console.log(category);
 
-  // useEffect(() => {
-  //   try {
-  //     axios.get("http://localhost:1000/allitems").then((Response) => {
-  //       set_shopcate_data(Response.data.details);
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, []);
+
+  const location = useLocation();
+
   useEffect(() => {
+    console.log('path',location.pathname);
     try {
       dispatch(allitemdetails());
     } catch (error) {
@@ -59,7 +55,7 @@ export default function ShopCategory() {
     <>
       <div className="shop-category">
         <img
-          src={banner}
+          src={category=='agricultural_tool'?banner:banner1}
           className="shop-category-banner block mx-auto my-8 w-[82%] h-[18rem]"
         />
         {/* <div className=" "> */}
@@ -78,7 +74,7 @@ export default function ShopCategory() {
           {updatedata.map((data, key) => (
             <div className="flex flex-col w-fit ">
               <div className="rounded-md w-[12rem]  m-2 border-2 border-slate h-[25rem] pb-2 ">
-                <Link to={`/product/${data._id}`}>
+                <Link to={`/product/${data._id}?page=tool`}>
                   <img
                     src={data.image}
                     className="border-b-2 border-slate h-[12rem] w-full p-2 pb-4 "

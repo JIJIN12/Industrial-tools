@@ -26,6 +26,10 @@ export default function Hero() {
       anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
     });
   }, []);
+
+  const latestcollection=()=>{
+    window.scrollTo({ top: 2200, behavior: "smooth" });
+  }
   return (
     <div className="hero">
       <div className="hero-left" >
@@ -39,7 +43,7 @@ export default function Hero() {
           <p data-aos="fade-right" data-aos-delay="500" data-aos-once="true">for everyone</p>
         </div>
         <div className="hero-latest-btn" data-aos="fade-right" data-aos-delay="200" data-aos-once="true">
-          <div>Latest collections</div>
+          <div onClick={latestcollection}>Latest collections</div>
           <img src="./images/arrow.png" className="h-9 block mix-blend-multiply arrow" />
         </div>
       </div>

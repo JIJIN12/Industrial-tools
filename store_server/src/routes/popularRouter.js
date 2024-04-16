@@ -61,4 +61,22 @@ popularRouter.post("/add", upload.single("image"), async function (req, res) {
       .json({ success: false, error: true, message: "Something went wrong" });
   }
 });
+
+popularRouter.get('/:id',async function(req,res){
+  try {
+    const productId = req.params.id
+    console.log("productId",productId);
+    const data = await popular_model.findOne({_id:productId})
+    console.log(data);
+    if(data){
+      return res
+        .status(200)
+        .json({ success: true, error: false, details: data });
+    }
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ success: false, error: true, message: "Something went wrong" });
+  }
+})
 module.exports = popularRouter;

@@ -10,19 +10,64 @@ const initialState = {
 
 export const cartitemdetails = createAsyncThunk(
   "cartitemdetails",
-  async (value) => {
+  async ({ id,  }) => {
     try {
-      console.log("start", value);
-      const response = await axios.post(
-        ` http://localhost:1000/cart/add/${value}`
-      );
+      console.log("start", id);
+      const response = await axios.post(`http://localhost:1000/cart/add/${id}`);
       console.log("response", response);
       return response;
     } catch (error) {
       console.log(error);
+      throw error;
     }
   }
 );
+
+// export const cartnewcollectionitemdetails = createAsyncThunk(
+//   "cartnewcollectionitemdetails",
+//   async (value) => {
+//     try {
+//       console.log("start", value);
+//       const response = await axios.post(
+//         ` http://localhost:1000/cart/addnewcoll/${value}`
+//       );
+//       console.log("response", response);
+//       return response;
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   }
+// );
+// export const cartpopularitemdetails = createAsyncThunk(
+//   "cartpopularitemdetails",
+//   async (value) => {
+//     try {
+//       console.log("start", value);
+//       const response = await axios.post(
+//         ` http://localhost:1000/cart/addpopular/${value}`
+//       );
+//       console.log("response", response);
+//       return response;
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   }
+// );
+// export const cartrelateditemdetails = createAsyncThunk(
+//   "cartrelateditemdetails",
+//   async (value) => {
+//     try {
+//       console.log("start", value);
+//       const response = await axios.post(
+//         ` http://localhost:1000/cart/addrelated/${value}`
+//       );
+//       console.log("response", response);
+//       return response;
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   }
+// );
 
 const cartitemSlice = createSlice({
   name: "cartitem",
@@ -38,6 +83,38 @@ const cartitemSlice = createSlice({
     builder.addCase(cartitemdetails.rejected, (state, action) => {
       state.error = true;
     });
+    // builder.addCase(cartnewcollectionitemdetails.pending, (state, action) => {
+    //   state.Loading = true;
+    // });
+    // builder.addCase(cartnewcollectionitemdetails.fulfilled, (state, action) => {
+    //   state.Loading = false;
+    //   state.cartitems_data = action.payload.data.details;
+    // });
+    // builder.addCase(cartnewcollectionitemdetails.rejected, (state, action) => {
+    //   state.error = true;
+    // });
+
+    // builder.addCase(cartpopularitemdetails.pending, (state, action) => {
+    //   state.Loading = true;
+    // });
+    // builder.addCase(cartpopularitemdetails.fulfilled, (state, action) => {
+    //   state.Loading = false;
+    //   state.cartitems_data = action.payload.data.details;
+    // });
+    // builder.addCase(cartpopularitemdetails.rejected, (state, action) => {
+    //   state.error = true;
+    // });
+
+    // builder.addCase(cartrelateditemdetails.pending, (state, action) => {
+    //   state.Loading = true;
+    // });
+    // builder.addCase(cartrelateditemdetails.fulfilled, (state, action) => {
+    //   state.Loading = false;
+    //   state.cartitems_data = action.payload.data.details;
+    // });
+    // builder.addCase(cartrelateditemdetails.rejected, (state, action) => {
+    //   state.error = true;
+    // });
   },
 });
 

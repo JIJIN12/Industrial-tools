@@ -12,7 +12,7 @@ export const newcollectiondetails = createAsyncThunk(
   "newcollectiondetails",
   async (id) => {
     console.log(id);
-    const response = await axios.get(`http://localhost:1000/newcolllection/${id}`);
+    const response = await axios.get(`http://localhost:1000/newcollection/${id}`);
     return response;
   }
 );

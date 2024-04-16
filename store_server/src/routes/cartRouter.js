@@ -1,61 +1,240 @@
 const express = require("express");
 const cartmodel = require("../model/cartModel");
 const allitems_model = require("../model/allitems");
+const NewCollection_model = require("../model/newcollectionModel");
+const popular_model = require("../model/popular");
+const Relatedproduct_model = require("../model/relatedproduct");
 const cartRouter = express.Router();
 
+
 cartRouter.get("/", async function (req, res) {
-    try {
-      console.log("1");
-      const cartitem = await cartmodel.aggregate([
+  try {
+    console.log("1");
+    const allitems = await cartmodel.aggregate([
+      {
+        $lookup: {
+          from: "allitems_tbs",
+          localField: "productid",
+          foreignField: "_id",
+          as: "allitems",
+        },
+      }
+    ]);
+
+    console.log("2");
+    console.log(allitems);
+
+    if (allitems) {
+      const newcollection = await cartmodel.aggregate([
         {
           $lookup: {
-            from: "allitems_tbs",
+            from: "Newcollection_tbs",
             localField: "productid",
             foreignField: "_id",
-            as: "products",
+            as: "newcollection",
           },
-        },
-        {
-          $unwind: "$products",
-        },
-        // {
-        //   $match: {
-        //     productid: new mongoose.Types.ObjectId,
-        //   },
-        // },
-        {
-          $group: {
-            _id: "$_id",
-            popular_name: { $first: "$products.popular_name" },
-            category: { $first: "$products.category" },
-            new_price: { $first: "$products.new_price" },
-            old_price: { $first: "$products.old_price" },
-            quantity: { $first: "$quantity" },
-            image: { $first: "$products.image" },
-          },
-        },
-        {
-          $sort: { popular_name: 1 } // Sort by product_name in ascending order
         }
       ]);
-      console.log("2");
-      console.log(cartitem);
-      if (cartitem) {
-        return res
-          .status(200)
-          .json({ success: "true", error: "false", details: cartitem });
-      } else {
-        return res
-          .status(400)
-          .json({ success: False, error: true, message: "data not found" });
+
+      console.log("3");
+      console.log(newcollection);
+
+      const combinedItems = combineItems(allitems, newcollection);
+
+      console.log("4");
+      console.log(combinedItems);
+
+      if (combinedItems) {
+        return res.status(200).json({ success: true, error: false, details: combinedItems });
       }
-    } catch (error) {
-      return res
-        .status(400)
-        .json({ success: false, error: true, message: "Something went wrong" });
+    }
+
+    return res.status(400).json({ success: false, error: true, message: "data not found" });
+  } catch (error) {
+    console.error(error);
+    return res.status(400).json({ success: false, error: true, message: "Something went wrong" });
+  }
+});
+
+function combineItems(allitems, newcollection) {
+  // Combine items from different collections into a single array
+  const combinedItems = [];
+
+  allitems.forEach(item => {
+    combinedItems.push({
+      _id: item._id,
+      products: item.allitems
+    });
+  });
+
+  newcollection.forEach(item => {
+    const existingItemIndex = combinedItems.findIndex(i => i._id === item._id);
+    if (existingItemIndex !== -1) {
+      combinedItems[existingItemIndex].products = item.newcollection;
+    } else {
+      combinedItems.push({
+        _id: item._id,
+        products: item.newcollection
+      });
     }
   });
 
+  return combinedItems;
+}
+
+
+cartRouter.post("/add/:id", async function (req, res) {
+  try {
+    console.log('kk');
+    const id = req.params.id;
+    const cartdata = await cartmodel.findOne({ productid: id });
+    console.log("addcart1");
+    if (cartdata) {
+      return res.status(400).json({
+        success: "false",
+        error: "true",
+        Message: "item already exist",
+      });
+    }
+    const data = await allitems_model.findOne({_id:id})
+    console.log(data);
+
+    const savedata = {
+      productid: id,
+      // quantity: ,
+    };
+    console.log('addcart3');
+    const cartsave = await cartmodel(savedata).save();
+    console.log('addcart4');
+
+    if (cartsave) {
+      return res.status(200).json({
+        success: "true",
+        error: "false",
+        Message: "cart added",
+        details: cartsave,
+      });
+    }
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ success: false, error: true, message: "Something went wrong" });
+  }
+});
+cartRouter.post("/addnewcoll/:id", async function (req, res) {
+  try {
+    console.log('kk');
+    const id = req.params.id;
+    const cartdata = await cartmodel.findOne({ productid: id });
+    console.log("addcart1");
+    if (cartdata) {
+      return res.status(400).json({
+        success: "false",
+        error: "true",
+        Message: "item already exist",
+      });
+    }
+    const data = await NewCollection_model.findOne({_id:id})
+    console.log(data);
+
+    const savedata = {
+      productid: id,
+      // quantity: ,
+    };
+    console.log('addcart3');
+    const cartsave = await cartmodel(savedata).save();
+    console.log('addcart4');
+
+    if (cartsave) {
+      return res.status(200).json({
+        success: "true",
+        error: "false",
+        Message: "cart added",
+        details: cartsave,
+      });
+    }
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ success: false, error: true, message: "Something went wrong" });
+  }
+});
+cartRouter.post("/addpopular/:id", async function (req, res) {
+  try {
+    console.log('kk');
+    const id = req.params.id;
+    const cartdata = await cartmodel.findOne({ productid: id });
+    console.log("addcart1");
+    if (cartdata) {
+      return res.status(400).json({
+        success: "false",
+        error: "true",
+        Message: "item already exist",
+      });
+    }
+    const data = await popular_model.findOne({_id:id})
+    console.log(data);
+
+    const savedata = {
+      productid: id,
+      // quantity: ,
+    };
+    console.log('addcart3');
+    const cartsave = await cartmodel(savedata).save();
+    console.log('addcart4');
+
+    if (cartsave) {
+      return res.status(200).json({
+        success: "true",
+        error: "false",
+        Message: "cart added",
+        details: cartsave,
+      });
+    }
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ success: false, error: true, message: "Something went wrong" });
+  }
+});
+cartRouter.post("/addrelated/:id", async function (req, res) {
+  try {
+    console.log('kk');
+    const id = req.params.id;
+    const cartdata = await cartmodel.findOne({ productid: id });
+    console.log("addcart1");
+    if (cartdata) {
+      return res.status(400).json({
+        success: "false",
+        error: "true",
+        Message: "item already exist",
+      });
+    }
+    const data = await Relatedproduct_model.findOne({_id:id})
+    console.log(data);
+
+    const savedata = {
+      productid: id,
+      // quantity: ,
+    };
+    console.log('addcart3');
+    const cartsave = await cartmodel(savedata).save();
+    console.log('addcart4');
+
+    if (cartsave) {
+      return res.status(200).json({
+        success: "true",
+        error: "false",
+        Message: "cart added",
+        details: cartsave,
+      });
+    }
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ success: false, error: true, message: "Something went wrong" });
+  }
+});
 cartRouter.post("/add/:id", async function (req, res) {
   try {
     console.log('kk');
@@ -187,3 +366,147 @@ cartRouter.post("/delete/:id", async function (req, res) {
   }
 });
 module.exports = cartRouter
+
+
+
+// console.log("1",req.body);
+// const page = req.body.page
+// console.log(page);
+// if(page='product'){
+//   const cartitem = await cartmodel.aggregate([
+//     {
+//       $lookup: {
+//         from: "allitems_tbs",
+//         localField: "productid",
+//         foreignField: "_id",
+//         as: "products",
+//       },
+//     },
+//     {
+//       $unwind: "$products",
+//     },
+//     // {
+//     //   $match: {
+//     //     productid: new mongoose.Types.ObjectId,
+//     //   },
+//     // },
+//     {
+//       $group: {
+//         _id: "$_id",
+//         popular_name: { $first: "$products.popular_name" },
+//         category: { $first: "$products.category" },
+//         new_price: { $first: "$products.new_price" },
+//         old_price: { $first: "$products.old_price" },
+//         quantity: { $first: "$quantity" },
+//         image: { $first: "$products.image" },
+//       },
+//     },
+//     {
+//       $sort: { popular_name: 1 } // Sort by product_name in ascending order
+//     }
+//   ]);
+// }
+
+// if(page='newCollection'){
+//   const cartitem = await cartmodel.aggregate([
+//     {
+//       $lookup: {
+//         from: "Newcollection_tbs",
+//         localField: "productid",
+//         foreignField: "_id",
+//         as: "products",
+//       },
+//     },
+//     {
+//       $unwind: "$products",
+//     },
+//     // {
+//     //   $match: {
+//     //     productid: new mongoose.Types.ObjectId,
+//     //   },
+//     // },
+//     {
+//       $group: {
+//         _id: "$_id",
+//         popular_name: { $first: "$products.popular_name" },
+//         // category: { $first: "$products.category" },
+//         new_price: { $first: "$products.new_price" },
+//         old_price: { $first: "$products.old_price" },
+//         quantity: { $first: "$quantity" },
+//         image: { $first: "$products.image" },
+//       },
+//     },
+//     {
+//       $sort: { popular_name: 1 } // Sort by product_name in ascending order
+//     }
+//   ]);
+// }
+
+// if(page='popular'){
+//   const cartitem = await cartmodel.aggregate([
+//     {
+//       $lookup: {
+//         from: "popular_tbs",
+//         localField: "productid",
+//         foreignField: "_id",
+//         as: "products",
+//       },
+//     },
+//     {
+//       $unwind: "$products",
+//     },
+//     // {
+//     //   $match: {
+//     //     productid: new mongoose.Types.ObjectId,
+//     //   },
+//     // },
+//     {
+//       $group: {
+//         _id: "$_id",
+//         popular_name: { $first: "$products.popular_name" },
+//         // category: { $first: "$products.category" },
+//         new_price: { $first: "$products.new_price" },
+//         old_price: { $first: "$products.old_price" },
+//         quantity: { $first: "$quantity" },
+//         image: { $first: "$products.image" },
+//       },
+//     },
+//     {
+//       $sort: { popular_name: 1 } // Sort by product_name in ascending order
+//     }
+//   ]);
+// }
+// if(page='related'){
+//   const cartitem = await cartmodel.aggregate([
+//     {
+//       $lookup: {
+//         from: "Relatedproduct_tb",
+//         localField: "productid",
+//         foreignField: "_id",
+//         as: "products",
+//       },
+//     },
+//     {
+//       $unwind: "$products",
+//     },
+//     // {
+//     //   $match: {
+//     //     productid: new mongoose.Types.ObjectId,
+//     //   },
+//     // },
+//     {
+//       $group: {
+//         _id: "$_id",
+//         relatedproduct_name: { $first: "$products.relatedproduct_name" },
+//         // category: { $first: "$products.category" },
+//         new_price: { $first: "$products.new_price" },
+//         old_price: { $first: "$products.old_price" },
+//         quantity: { $first: "$quantity" },
+//         image: { $first: "$products.image" },
+//       },
+//     },
+//     {
+//       $sort: { popular_name: 1 } // Sort by product_name in ascending order
+//     }
+//   ]);
+// }

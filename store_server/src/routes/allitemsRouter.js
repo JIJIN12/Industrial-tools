@@ -24,7 +24,7 @@ const upload = multer({ storage: storage });
 
 allitemsRouter.get('/',async function(Req,res){
   try {
-    console.log('start');
+    console.log('allitemsstart');
     const data = await allitems_model.find()
     if(data){
       return res

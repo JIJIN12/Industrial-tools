@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./NewCollection.css";
 import axios from "axios";
 import Aos from "aos";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 export default function NewColllection() {
   const [refreshCount, setRefreshCount] = useState(0);
   const [shuffledCollection, setShuffledCollection] = useState([]);
@@ -10,7 +10,9 @@ export default function NewColllection() {
   const [newcollection, set_newcollection] = useState([]);
   console.log(newcollection);
   const navigate = useNavigate();
+  const page = "newcollection";
   useEffect(() => {
+
     axios.get("http://localhost:1000/newcollection").then((Response) => {
       set_newcollection(Response.data.details);
     });
@@ -52,7 +54,6 @@ export default function NewColllection() {
     }
   }, [newcollection]);
 
-
   return (
     <div className="mb-[100px]">
       <div className="new-collections">
@@ -71,39 +72,7 @@ export default function NewColllection() {
           data-aos-once="true"
         />
         <div className="collections">
-          {/* {NewColllection.map((data,key)=>(
-                   return <Item key={i} id={Item.id} name={Item.name} new_price={Item.new_price} old_price ={Item.old_price}
-
-        ) */}
           <div className="flex justify-start flex-wrap  gap-6 mx-[10rem]  pb-3">
-            {/* {newcollection.slice(0, 5).map((data, i) => (
-              <div className="rounded-md w-[12rem] my-2 border-2 border-slate h-[25rem] pb-2"  data-aos="fade-up"
-              data-aos-offset="200"
-              data-aos-duration="1000" data-aos-once="true">
-                <div className=" flex justify-end "><img src="./images/new.png" className="h-9"/></div>
-                <img
-                  src={data.image}
-                  className="border-b-2 border-slate h-[12rem] w-full p-2 pb-4 "
-                />
-                <div className="pl-3 pr-1">
-                  <p className="text-xs pt-3">
-                    {data.popular_name
-                      ? `${data.popular_name.substring(0, 35)}...`
-                      : ""}
-                  </p>
-                  <div className="">
-                    <p>
-                      <b>${data.new_price}</b>
-                      <p className="text-xs">
-                        MRP $<strike>{data.old_price}</strike>
-                      </p>
-                    </p>
-                    <p>FREE Delivery </p>
-                  </div>
-                </div>
-              </div>
-            ))} */}
-
             {shuffledCollection.slice(0, 5).map((data, i) => (
               <div
                 key={i}
@@ -113,19 +82,15 @@ export default function NewColllection() {
                 data-aos-duration="1000"
                 data-aos-once="true"
               >
-                <div
-                  className="flex justify-end"
-                 
-                >
+                <div className="flex justify-end">
                   <img src="./images/new.png" className="h-9" alt="New" />
                 </div>
-                <Link to={`/product/${data._id}`}>
-
-                <img
-                  src={data.image}
-                  alt="Product"
-                  className="border-b-2 border-slate h-[12rem] w-full p-2 pb-4"
-                />
+                <Link to={`/product/${data._id}?page=${page}`}>
+                  <img
+                    src={data.image}
+                    alt="Product"
+                    className="border-b-2 border-slate h-[12rem] w-full p-2 pb-4"
+                  />
                 </Link>
                 <div className="pl-3 pr-1">
                   <p className="text-xs pt-3">

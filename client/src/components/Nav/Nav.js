@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Nav.css";
-import { Link } from "react-router-dom";
+import { Link,useLocation } from "react-router-dom";
 import ShopCategory from "../../pages/ShopCategory";
 import menuimg from "../Assets/images/menu.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,7 @@ export default function Nav() {
   console.log(menu);
   const [cartdata, set_cartdata] = useState([]);
   const menuRef = useRef();
-
+  const location = useLocation();
   const dropdown_toggle = (e) => {
     menuRef.current.classList.toggle("nav-menu-visible");
     e.target.classList.toggle("open");
@@ -21,6 +21,9 @@ export default function Nav() {
       set_cartdata(response.data.details);
     });
   }, []);
+  useEffect(() => {
+    console.log("Current pathname:", location.pathname);
+  }, [location]);
   return (
     <div className="navbar">
       <div className="nav-logo">
@@ -37,7 +40,7 @@ export default function Nav() {
           <Link to={"/"} className="no-underline">
             shop
           </Link>
-          {menu == "shop" ? <hr /> : <></>}
+          {location.pathname == "/" ? <hr /> : <></>}
         </li>
         <li
           onClick={() => {
@@ -47,7 +50,7 @@ export default function Nav() {
           <Link to={"/construction_tool"} className="no-underline">
             men
           </Link>
-          {menu == "construction_tool" ? <hr /> : <></>}
+          {location.pathname == "/construction_tool" ? <hr /> : <></>}
         </li>
         <li
           onClick={() => {
@@ -57,7 +60,7 @@ export default function Nav() {
           <Link to={"/agricultural_tool"} className="no-underline">
             kids
           </Link>
-          {menu == "agricultural_tool" ? <hr /> : <></>}
+          {location.pathname == "/agricultural_tool" ? <hr /> : <></>}
         </li>
       </ul>
       <div className="nav-login-cart grid grid-cols-2 gap-5">
