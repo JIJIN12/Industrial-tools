@@ -87,7 +87,7 @@ export default function NewColllection() {
           </Button>
         </div>
         <div className="collections">
-          <div className="flex justify-start flex-wrap  gap-6 mx-[10rem]  pb-3">
+          <div className="flex flex-wrap justify-start gap-6 ml-[10rem] mr-[5rem]  pb-3">
             {shuffledCollection
               .slice(0, viewnewcoll_data ? shuffledCollection.length : 5)
               .map((data, i) => (
