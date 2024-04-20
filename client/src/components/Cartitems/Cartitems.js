@@ -9,7 +9,7 @@ export default function Cartitems() {
 
   const updateCartData = async () => {
     await axios
-      .get("http://localhost:1000/cart")
+      .get("https://industrial-tools-3.onrender.com/cart")
       .then((response) => {
         set_cartitems(response.data.details);
         // Recalculate total price whenever cart data changes
@@ -34,7 +34,7 @@ export default function Cartitems() {
 
   const increment = (id) => {
     axios
-      .post(`http://localhost:1000/cart/incre/${id}`)
+      .post(`https://industrial-tools-3.onrender.com/cart/incre/${id}`)
       .then((response) => {
         console.log(response.data.details);
         updateCartData();
@@ -46,7 +46,7 @@ export default function Cartitems() {
 
   const decrement = (id) => {
     axios
-      .post(`http://localhost:1000/cart/decre/${id}`)
+      .post(`https://industrial-tools-3.onrender.com/cart/decre/${id}`)
       .then((response) => {
         console.log(response.data.details);
         updateCartData();
@@ -58,7 +58,7 @@ export default function Cartitems() {
 
   const removecart = async (id) => {
     await axios
-      .post(`http://localhost:1000/cart/delete/${id}`)
+      .post(`https://industrial-tools-3.onrender.com/cart/delete/${id}`)
       .then((Response) => {
         console.log(Response.data.details);
         updateCartData();

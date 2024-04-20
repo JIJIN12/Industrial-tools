@@ -10,11 +10,11 @@ const initialState = {
 }
 
 export const populardetails = createAsyncThunk('populardetails',async ()=>{
-    const response = await axios.get('http://localhost:1000/popular')
+    const response = await axios.get('https://industrial-tools-3.onrender.com/popular')
     return response
 })
 export const popularproductdetails = createAsyncThunk('popularproductdetails',async (id)=>{
-    const response = await axios.get(`http://localhost:1000/popular/${id}`)
+    const response = await axios.get(`https://industrial-tools-3.onrender.com/popular/${id}`)
     return response
 })
 

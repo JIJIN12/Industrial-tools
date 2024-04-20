@@ -18,7 +18,7 @@ export default function LoginSignup() {
   const submit = (e) => {
     try {
       e.preventDefault();
-      axios.post("http://localhost:1000/login", login_data).then((Response) => {
+      axios.post("https://industrial-tools-3.onrender.com/login", login_data).then((Response) => {
         console.log(Response.data.Message);
 
         set_loginstore_data(Response.data);

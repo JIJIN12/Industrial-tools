@@ -19,7 +19,7 @@ export default function Nav() {
     e.target.classList.toggle("open");
   };
   useEffect(() => {
-    axios.get("http://localhost:1000/cart").then((response) => {
+    axios.get("https://industrial-tools-3.onrender.com/cart").then((response) => {
       set_cartdata(response.data.details);
     });
   }, []);

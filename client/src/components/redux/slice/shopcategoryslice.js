@@ -11,7 +11,7 @@ const initialState = {
 export const allitemdetails = createAsyncThunk('allitemdetails',async ()=>{
     try {
         console.log('start');
-        const response = await axios.get('http://localhost:1000/allitems')
+        const response = await axios.get('https://industrial-tools-3.onrender.com/allitems')
     console.log(response);
     return response
     } catch (error) {

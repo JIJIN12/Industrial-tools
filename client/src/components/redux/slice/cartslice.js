@@ -13,7 +13,7 @@ export const cartitemdetails = createAsyncThunk(
   async (id) => {
     try {
       console.log("start", id);
-      const response = await axios.post(`http://localhost:1000/cart/add/${id}`);
+      const response = await axios.post(`https://industrial-tools-3.onrender.com/cart/add/${id}`);
       console.log("response", response);
       return response;
     } catch (error) {

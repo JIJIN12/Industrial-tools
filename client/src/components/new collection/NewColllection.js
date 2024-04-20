@@ -14,7 +14,7 @@ export default function NewColllection() {
   const page = "newcollection";
 
   useEffect(() => {
-    axios.get("http://localhost:1000/newcollection").then((response) => {
+    axios.get("https://industrial-tools-3.onrender.com/newcollection").then((response) => {
       set_newcollection(response.data.details);
     });
   }, []);

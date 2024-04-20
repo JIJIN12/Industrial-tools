@@ -12,7 +12,7 @@ export const relatedproductdetails = createAsyncThunk(
   "relatedproductdetails",
   async (id) => {
     console.log(id);
-    const response = await axios.get(`http://localhost:1000/relatedproducts/${id}`);
+    const response = await axios.get(`https://industrial-tools-3.onrender.com/relatedproducts/${id}`);
     return response;
   }
 );
