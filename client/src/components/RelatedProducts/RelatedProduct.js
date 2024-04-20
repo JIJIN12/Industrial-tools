@@ -13,7 +13,7 @@ export default function RelatedProduct() {
 
   useEffect(() => {
     try {
-      axios.get("http://localhost:1000/relatedproducts").then((Response) => {
+      axios.get("https://industrial-tools-3.onrender.com/relatedproducts").then((Response) => {
         set_relatedproduct(Response.data.details);
       });
     } catch (error) {}
