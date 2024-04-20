@@ -39,6 +39,7 @@ export default function ProductDisplay(props1) {
   const [cart, set_cart] = useState(getdefaultcart());
   console.log(cart);
   const addtocart = (id) => {
+    console.log(id);
     dispatch(cartitemdetails(id));
   
   };

@@ -10,7 +10,7 @@ const initialState = {
 
 export const cartitemdetails = createAsyncThunk(
   "cartitemdetails",
-  async ({ id,  }) => {
+  async (id) => {
     try {
       console.log("start", id);
       const response = await axios.post(`http://localhost:1000/cart/add/${id}`);
@@ -23,51 +23,6 @@ export const cartitemdetails = createAsyncThunk(
   }
 );
 
-// export const cartnewcollectionitemdetails = createAsyncThunk(
-//   "cartnewcollectionitemdetails",
-//   async (value) => {
-//     try {
-//       console.log("start", value);
-//       const response = await axios.post(
-//         ` http://localhost:1000/cart/addnewcoll/${value}`
-//       );
-//       console.log("response", response);
-//       return response;
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
-// );
-// export const cartpopularitemdetails = createAsyncThunk(
-//   "cartpopularitemdetails",
-//   async (value) => {
-//     try {
-//       console.log("start", value);
-//       const response = await axios.post(
-//         ` http://localhost:1000/cart/addpopular/${value}`
-//       );
-//       console.log("response", response);
-//       return response;
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
-// );
-// export const cartrelateditemdetails = createAsyncThunk(
-//   "cartrelateditemdetails",
-//   async (value) => {
-//     try {
-//       console.log("start", value);
-//       const response = await axios.post(
-//         ` http://localhost:1000/cart/addrelated/${value}`
-//       );
-//       console.log("response", response);
-//       return response;
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
-// );
 
 const cartitemSlice = createSlice({
   name: "cartitem",

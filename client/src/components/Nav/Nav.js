@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Nav.css";
-import { Link,useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ShopCategory from "../../pages/ShopCategory";
 import menuimg from "../Assets/images/menu.png";
 import { useDispatch, useSelector } from "react-redux";
 import { cartitemdetails } from "../redux/slice/cartslice";
 import axios from "axios";
+import TrackOrder from "../new collection/TrackOrder/TrackOrder";
 export default function Nav() {
+  const [showTrackOrder, setShowTrackOrder] = useState(false);
   const [menu, setMennu] = useState("shop");
   console.log(menu);
   const [cartdata, set_cartdata] = useState([]);
@@ -24,6 +26,14 @@ export default function Nav() {
   useEffect(() => {
     console.log("Current pathname:", location.pathname);
   }, [location]);
+
+  const handleOpenTrackOrder = () => {
+    setShowTrackOrder(true);
+  };
+
+  const handleCloseTrackOrder = () => {
+    setShowTrackOrder(false);
+  };
   return (
     <div className="navbar">
       <div className="nav-logo">
@@ -65,8 +75,15 @@ export default function Nav() {
       </ul>
       <div className="nav-login-cart grid grid-cols-2 gap-5">
         <Link to={"/login"}>
-          <button>Login</button>
+          <button>Login Now</button>
         </Link>
+        <button
+          onClick={handleOpenTrackOrder}
+          className="border-0 hover:bg-slate-100"
+        >
+          Track Order
+        </button>
+        <TrackOrder open={showTrackOrder} handleClose={handleCloseTrackOrder} />{" "}
         <Link to={"/cart"}>
           <img src="./images/cart.jpg " className="h-[3rem]" />
         </Link>

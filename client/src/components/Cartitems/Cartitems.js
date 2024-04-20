@@ -1,16 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import './Cartitems.css'
+import "./Cartitems.css";
 export default function Cartitems() {
   const [cartitems, set_cartitems] = useState([]);
   const [carttotal, set_carttotal] = useState([]);
   console.log(carttotal);
-  console.log(cartitems.length);
-  
-;
-  
-  const updateCartData = async() => {
-   await axios
+  console.log(cartitems);
+
+  const updateCartData = async () => {
+    await axios
       .get("http://localhost:1000/cart")
       .then((response) => {
         set_cartitems(response.data.details);
@@ -29,14 +27,10 @@ export default function Cartitems() {
         console.log(error);
       });
   };
- 
 
-
-
-
-useEffect(() => {
-  updateCartData();
-}, []);
+  useEffect(() => {
+    updateCartData();
+  }, []);
 
   const increment = (id) => {
     axios
@@ -62,14 +56,17 @@ useEffect(() => {
       });
   };
 
-  const removecart= async(id)=>{
-    await axios.post(`http://localhost:1000/cart/delete/${id}`).then((Response)=>{
-      console.log(Response.data.details);
-      updateCartData();
-    }).catch((error)=>{
-      console.log(error);
-    })
-  }
+  const removecart = async (id) => {
+    await axios
+      .post(`http://localhost:1000/cart/delete/${id}`)
+      .then((Response) => {
+        console.log(Response.data.details);
+        updateCartData();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="caritems mx-[120px] my-[100px]">
@@ -85,8 +82,15 @@ useEffect(() => {
       {cartitems.map((data, key) => (
         <div className="">
           <div className="cartitems-product grid grid-cols-6 items-center gap-[75px] px-[0]  text-[#454545] text-[14px] font-semibold">
-            <img src={data.image} className=" cartitems-product-img  w-[60px]" />
-            <p>{data.popular_name ? `${data.popular_name.substring(0, 20)}...` : data.popular_name}</p>
+            <img
+              src={data.image}
+              className=" cartitems-product-img  w-[60px]"
+            />
+            <p>
+              {data.popular_name
+                ? `${data.popular_name.substring(0, 29)}.`
+                : data.relatedproduct_name.substring(0,42)}..
+            </p>
             {/* <p>{data.popular_name}</p> */}
             <p>{data.new_price}</p>
             {/* <button className="">{data.quantity}</button> */}
@@ -132,8 +136,16 @@ useEffect(() => {
                 +
               </button>
             </div>
-            <p>${data.quantity * Number(data.new_price.replace(/[^0-9.]/g, ""))}</p>
-            <img src="./images/delete (1).png" className="cartitem-removeicon" onClick={()=>{removecart(data._id)}}/>
+            <p>
+              ${data.quantity * Number(data.new_price.replace(/[^0-9.]/g, ""))}
+            </p>
+            <img
+              src="./images/delete (1).png"
+              className="cartitem-removeicon"
+              onClick={() => {
+                removecart(data._id);
+              }}
+            />
           </div>
           <hr />
         </div>

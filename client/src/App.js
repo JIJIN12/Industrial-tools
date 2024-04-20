@@ -14,6 +14,7 @@ import banner1 from './components/Assets/images/banner1.jpg'
 import banner2 from './components/Assets/images/banner2.jpeg'
 import Footer from "./components/Footer/Footer";
 import Popular from "./components/Popular/Popular";
+import TrackOrder from "./components/new collection/TrackOrder/TrackOrder";
 
 function App() {
   return (
@@ -29,7 +30,6 @@ function App() {
         </Route>
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/login" element={<LoginSignup />} />
-        <Route path="/popular" element={<Popular />} />
       </Routes>
       <Footer/>
     </BrowserRouter>
