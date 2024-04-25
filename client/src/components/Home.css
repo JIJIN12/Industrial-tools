@@ -10,7 +10,8 @@
   justify-content: center;
 }
 .home-discount:hover {
-  border-top: 3px solid;
+  border-bottom: 3px solid;
+  border-right: 1px;
   border-color: red;
   color: red;
 }

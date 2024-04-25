@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./CSS/ShopCategory.css";
 import Footer from "../components/Footer/Footer";
-import banner from "../components/Assets/images/banner1.jpg";
+import banner from "../components/Assets/images/storebanner.avif";
 import banner1 from "../components/Assets/images/storebanner.jpeg";
 import axios from "axios";
 import { Link, useLocation, useParams } from "react-router-dom";
