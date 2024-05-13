@@ -1,0 +1,15 @@
+@media(max-width:550px){
+    .profile-section1{
+        min-width: 200px;
+    }
+}
+
+@media(max-width:350px){
+    .profile-section1{
+        min-width: 180px;
+    }
+    .profile-data{
+        margin-bottom: 0;
+        padding: 2rem 1rem ;
+    }
+}

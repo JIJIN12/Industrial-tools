@@ -165,8 +165,12 @@
 }
 
 @media (max-width: 500px) {
+  .sticky-navbar{
+    min-width: 400px;
+    font-size: .7rem;
+  }
   .navbar {
-    min-width: 350px;
+    min-width: 400px;
     margin: 8px 0px;
     gap: 0px;
   }

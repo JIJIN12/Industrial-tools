@@ -75,7 +75,7 @@ export default function TrackOrder({ open, handleClose }) {
                 component="h2"
                 sx={{ display: "flex", justifyContent: "center" }}
               >
-                Welcome to Mogli Coins
+                Welcome to Indusnet Coins
               </Typography>
               <Typography
                 variant="p"
@@ -87,12 +87,12 @@ export default function TrackOrder({ open, handleClose }) {
               <br />
               <br />
               <p className="flex justify-center text-[#F4CE14]">
-                Sign Up & avail 20 Mogli Coins now
+                Sign Up & avail 20 Indusnet Coins now
               </p>
               <br />
               <div className="w-[100%] flex justify-center">
                 <button className="flex justify-center bg-[#E0BB20] px-5 py-3 rounded-lg">
-                  1 Mogli Coin = ₹ 1<br /> Earn coins on every product you buy
+                  1 Indusnet Coin = ₹ 1<br /> Earn coins on every product you buy
                 </button>
               </div>
               <br />

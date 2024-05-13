@@ -7,6 +7,9 @@ import { cartitemdetails } from "../redux/slice/cartslice";
 import axios from "axios";
 import TrackOrder from "../new collection/TrackOrder/TrackOrder";
 import profileicon from "../Assets/images/profile1.jpg";
+import SearchIcon from "@mui/icons-material/Search";
+import { styled, alpha } from "@mui/material/styles";
+import InputBase from "@mui/material/InputBase";
 
 export default function Nav() {
   const [showTrackOrder, setShowTrackOrder] = useState(false);
@@ -15,12 +18,55 @@ export default function Nav() {
   const menuRef = useRef();
   const location = useLocation();
   const [showList, setShowList] = useState(false);
-console.log(showList);
-  const dropdown_toggle = (e) => {
-    menuRef.current.classList.toggle("nav-menu-visible");
-    e.target.classList.toggle("open");
-  };
+  console.log(showList);
+  // const dropdown_toggle = (e) => {
+  //   menuRef.current.classList.toggle("nav-menu-visible");
+  //   e.target.classList.toggle("open");
+  // };
+  const Search = styled("div")(({ theme }) => ({
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(1),
+      width: "auto",
+    },
+  }));
 
+  const SearchIconWrapper = styled("div")(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  }));
+  const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: "inherit",
+    width: "100%",
+    border: "2px solid #DDDDDD",
+    borderTopLeftRadius: "6px",
+    borderBottomLeftRadius: "6px",
+    borderRight: "0",
+    "& .MuiInputBase-input": {
+      padding: theme.spacing(1, 1, 1, 0),
+      // vertical padding + font size from searchIcon
+      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+      transition: theme.transitions.create("width"),
+      [theme.breakpoints.up("sm")]: {
+        width: "35ch",
+        "&:focus": {
+          width: "40ch",
+        },
+      },
+    },
+  }));
   useEffect(() => {
     axios
       .get("https://industrial-tools-3.onrender.com/cart")
@@ -43,8 +89,8 @@ console.log(showList);
   };
   useEffect(() => {
     handleScroll();
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -60,19 +106,22 @@ console.log(showList);
   };
 
   return (
-    <div className="sticky top-0 z-50 bg-white">
+    <div className="sticky top-0 z-50 bg-white shadow-md min-w-[400px]">
       <div className="navbar border-b-2 flex justify-between items-center px-4">
         <div className="nav-logo">
           <img src="./images/discount1.jpg" className="w-20" alt="logo" />
-          <p>INDUSNET</p>
+          <a className="no-underline" href="/">
+            {" "}
+            <p>INDUSNET</p>
+          </a>
         </div>
-        <img
+        {/* <img
           src={menuimg}
           onClick={dropdown_toggle}
           className="nav-dropdown"
           alt="menu"
-        />
-        <ul className="nav-menu hidden" ref={menuRef}>
+        /> */}
+        {/* <ul className="nav-menu hidden" ref={menuRef}>
           <li
             onClick={() => {
               setMennu("shop");
@@ -103,7 +152,22 @@ console.log(showList);
             </Link>
             {location.pathname === "/agricultural_tool" ? <hr /> : <></>}
           </li>
-        </ul>
+        </ul> */}
+        <div className="flex">
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search Product, Category, Brand…"
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Search>
+          <button className=" border-l-0 px-3 py-2 bg-red-500 text-white rounded-r-lg ">
+            Search
+          </button>
+        </div>
+
         <div className="nav-login-cart flex gap-4">
           <Link to={"/login"}>
             <button>Login Now</button>
@@ -133,33 +197,92 @@ console.log(showList);
           <div
             className={
               location.pathname === "/"
-                ? "sticky top-20 z-40 bg-white py-2 px-9 border-b-[1px] "
-                : "sticky top-5 z-40 bg-white py-2 px-9"
+                ? "sticky-navbar sticky top-20 z-40 bg-white py-2 px-9 border-b-[1px] "
+                : "sticky-navbar sticky top-5 z-40 bg-white py-2 px-9"
             }
           >
-            <ul className="list-none grid grid-cols-5 gap-[1rem] justify-center px-3 py-2">
+            <ul className="list-none flex justify-between gap-[1rem] px-3 py-2">
               <a href="" className="no-underline text-black">
-                <li className="text-[1rem]">Safety</li>
+                <li
+                  onClick={() => {
+                    setMennu("safety_tool");
+                  }}
+                >
+                  <Link to={"/safety_tool"} className="no-underline text-black">
+                    Safety
+                  </Link>
+                  {location.pathname === "/safety_tool" ? <hr /> : <></>}
+                </li>{" "}
               </a>
               <a href="" className="no-underline text-black">
-                <li>Electricals</li>
+                <li
+                  onClick={() => {
+                    setMennu("safety_tool");
+                  }}
+                >
+                  <Link to={"/electrical"} className="no-underline text-black">
+                    Electrical
+                  </Link>
+                  {location.pathname === "/electrical" ? <hr /> : <></>}
+                </li>{" "}
               </a>
               <li
+                className=" "
                 onClick={() => {
                   setMennu("construction_tool");
                 }}
               >
-                <Link to={"/construction_tool"} className="no-underline text-black">
+                <Link
+                  to={"/construction_tool"}
+                  className="no-underline text-black"
+                >
                   Power Tools
                 </Link>
-                {location.pathname === "/construction_tool" ? <hr className="" /> : <></>}
+                {location.pathname === "/construction_tool" ? (
+                  <hr className="" />
+                ) : (
+                  <></>
+                )}
+              </li>
+              <li
+                className=" "
+                onClick={() => {
+                  setMennu("pumps");
+                }}
+              >
+                <Link to={"/pumps"} className="no-underline text-black">
+                  Motors & pumps
+                </Link>
+                {location.pathname === "/pumps" ? <hr className="" /> : <></>}
               </li>
               <a href="" className="no-underline text-black">
-                <li>Pumps & Motors</li>
+                <li
+                  onClick={() => {
+                    setMennu("agricultural_tool");
+                  }}
+                >
+                  <Link
+                    to={"/agricultural_tool"}
+                    className="no-underline text-black"
+                  >
+                    Gardening Tools
+                  </Link>
+                  {location.pathname === "/agricultural_tool" ? <hr /> : <></>}
+                </li>{" "}
               </a>
-              <a href="" className="no-underline text-black">
-                <li>Medical Supplies</li>
-              </a>
+              <li
+                onClick={() => {
+                  setMennu("MedicalSupplies");
+                }}
+              >
+                <Link
+                  to={"/MedicalSupplies"}
+                  className="no-underline text-black"
+                >
+                  Medical Supplies{" "}
+                </Link>
+                {location.pathname === "/MedicalSupplies" ? <hr /> : <></>}
+              </li>{" "}
             </ul>
           </div>
         </div>

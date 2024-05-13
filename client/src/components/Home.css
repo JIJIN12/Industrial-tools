@@ -47,7 +47,9 @@ p{
   }
 }
 @media screen and (max-width: 800px)  {
-  
+  .home-category div{
+   font-size: .9rem
+  }
   .offers {
     background-color: aqua;
     height: 200px;
@@ -63,16 +65,18 @@ p{
     height: max-content;
   }
 }
-/* @media screen and (max-width: 500px) {
+@media screen and (max-width: 500px)  {
   .home-category{
-    min-width: 130px;
-    width: 30%;
+    min-width: 150px;
   }
-  .home-category div{
-   font-size: 7px;
-  }
+  .home-category div p{
+    font-size: .5rem
+   }
   .home-slider-div{
     width: 100%;
+  }
+  .home-category-brand button{
+    font-size: .5rem;
   }
   .home-slider{
     height: 30vh;
@@ -80,4 +84,4 @@ p{
   .home-slider img{
     height: 30vh;
   }
-} */
+}

@@ -9,6 +9,7 @@ const cors = require('cors');
 const registerRouter = require("./src/routes/registerRouter");
 const loginRouter = require("./src/routes/loginRouter");
 const relatedproductRouter = require("./src/routes/relatedproductRouter");
+const profileRouter = require("./src/routes/profileRouter");
 const app = express();
 
 // app.use(bodyparser())
@@ -35,6 +36,7 @@ app.use("/cart", cartRouter);
 app.use("/relatedproducts", relatedproductRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
+app.use("/profile", profileRouter);
 
 const url =
   "mongodb+srv://jijinsuresh6:jijinsuresh6@cluster0.dh7smys.mongodb.net/TOOLS_SERVER?retryWrites=true&w=majority";

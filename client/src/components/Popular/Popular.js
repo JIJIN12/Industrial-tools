@@ -30,7 +30,7 @@ export default function Popular() {
   };
 
   return (
-    <div className=" ">
+    <div className="">
       <div className="popular mb-[8rem] ">
         <div
           className="flex flex-col justify-center items-center"
@@ -102,7 +102,7 @@ export default function Popular() {
               rem]"
               >
                 {" "}
-                {viewAllData ? "less" : "more"}
+                {/* {viewAllData ? "less" : "more"} */}
               </p>
             </div>
           </div>
