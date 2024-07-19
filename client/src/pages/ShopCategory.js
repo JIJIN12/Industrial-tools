@@ -63,6 +63,8 @@ export default function ShopCategory() {
             <div className="w-[100%] px-[2rem]">
               <img
                 src={
+                  category === "stationary"
+                    ? banner:
                   category === "agricultural_tool"
                     ? banner
                     : category === "MedicalSupplies"

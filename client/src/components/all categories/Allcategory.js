@@ -4,7 +4,7 @@ export default function Allcategory() {
   return (
     <div className="allcategory grid  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-start  gap-x-[1rem] gap-y-[2rem] bg-slate-100 py-[2rem] px-[1rem]">
       {/* <div className="allcategory flex flex-wrap justify-start flex-rows gap-x-[1rem] gap-y-[2rem] bg-slate-100 py-[2rem]"> */}
-      <a href='#' className="no-underline text-black">
+      <a href="#" className="no-underline text-black">
         {" "}
         <div className="px-4 py-2  border-black rounded-lg bg-white shadow-md">
           <h6>Safety & PPE Supplies</h6>
@@ -14,8 +14,7 @@ export default function Allcategory() {
           <button className="text-red-600">View More</button>
         </div>
       </a>
-           <a href='#' className="no-underline text-black">
-
+      <a href="#" className="no-underline text-black">
         {" "}
         <div className="px-4 py-2  border-black rounded-lg bg-white shadow-md">
           <h6> Industrial Tools & Machinery</h6>
@@ -26,8 +25,7 @@ export default function Allcategory() {
           <button className="text-red-600">View More</button>
         </div>
       </a>
-           <a href='#' className="no-underline text-black">
-
+      <a href="#" className="no-underline text-black">
         {" "}
         <div className="px-4 py-2  border-black rounded-lg bg-white shadow-md">
           <h6>Electrical Tools & Equipment</h6>
@@ -37,8 +35,7 @@ export default function Allcategory() {
           <button className="text-red-600">View More</button>
         </div>
       </a>
-           <a href='#' className="no-underline text-black">
-
+      <a href="#" className="no-underline text-black">
         {" "}
         <div className="px-4 py-2  border-black rounded-lg bg-white shadow-md">
           <h6>Healthcare, Medical & Lab Supplies</h6>
@@ -48,8 +45,7 @@ export default function Allcategory() {
           <button className="text-red-600">View More</button>
         </div>
       </a>
-           <a href='#' className="no-underline text-black">
-
+      <a href="#" className="no-underline text-black">
         {" "}
         <div className="px-4 py-2  border-black rounded-lg bg-white shadow-md">
           <h6> Automotive Supplies</h6>
@@ -59,8 +55,7 @@ export default function Allcategory() {
           <button className="text-red-600">View More</button>
         </div>
       </a>
-           <a href='#' className="no-underline text-black">
-
+      <a href="#" className="no-underline text-black">
         {" "}
         <div className="px-4 py-2  border-black rounded-lg bg-white shadow-md">
           <h6> Office Stationery & Supplies</h6>
@@ -70,8 +65,7 @@ export default function Allcategory() {
           <button className="text-red-600">View More</button>
         </div>
       </a>
-           <a href='#' className="no-underline text-black">
-
+      <a href="#" className="no-underline text-black">
         {" "}
         <div className="px-4 py-2  border-black rounded-lg bg-white shadow-md">
           <h6> Building & Construction Supplies</h6>
@@ -81,8 +75,7 @@ export default function Allcategory() {
           <button className="text-red-600">View More</button>
         </div>
       </a>
-           <a href='#' className="no-underline text-black">
-
+      <a href="#" className="no-underline text-black">
         {" "}
         <div className="px-4 py-2  border-black rounded-lg bg-white shadow-md">
           <h6>Agriculture, Gardening & Landscaping</h6>
@@ -92,8 +85,7 @@ export default function Allcategory() {
           <button className="text-red-600">View More</button>
         </div>
       </a>
-           <a href='#' className="no-underline text-black">
-
+      <a href="#" className="no-underline text-black">
         {" "}
         <div className="px-4 py-2  border-black rounded-lg bg-white shadow-md">
           <h6>Packaging & Material Handling</h6>
@@ -103,8 +95,7 @@ export default function Allcategory() {
           <button className="text-red-600">View More</button>
         </div>
       </a>
-           <a href='#' className="no-underline text-black">
-
+      <a href="#" className="no-underline text-black">
         {" "}
         <div className="px-4 py-2  border-black rounded-lg bg-white shadow-md">
           <h6>Measurement & Testing</h6>
