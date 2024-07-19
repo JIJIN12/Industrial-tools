@@ -1,7 +1,7 @@
 .navbar {
   display: flex;
   justify-content: space-around;
-  padding-top: 1rem;
+  /* padding-top: 1rem; */
   box-shadow: 0 2px 3px -2px black;
   align-items: center;
 }
@@ -81,7 +81,7 @@
 }
 @media (max-width: 1280px) {
   .navbar {
-    padding: 12px 50px;
+    padding: 5px 50px;
   }
   .nav-logo img {
     width: 40px;
@@ -109,7 +109,7 @@
 }
 @media (max-width: 1024px) {
   .navbar {
-    padding: 12px 30px;
+    padding: 2px 30px;
   }
   .nav-logo img {
     width: 40px;

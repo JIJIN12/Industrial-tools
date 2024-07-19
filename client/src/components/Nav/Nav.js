@@ -105,105 +105,135 @@ export default function Nav() {
     setShowTrackOrder(false);
   };
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
   return (
     <div className="sticky top-0 z-50 bg-white shadow-md min-w-[400px]">
-  <div className="navbar border-b-2 flex justify-between items-center px-4">
-    <div className="nav-logo">
-      <img src="./images/logo.png" className="w-24" alt="logo" />
-      <a className="no-underline" href="/">
-        <p>INDUSNET</p>
-      </a>
-    </div>
-    <div className="flex">
-      <Search>
-        <SearchIconWrapper>
-          <SearchIcon />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Search Product, Category, Brand…"
-          inputProps={{ "aria-label": "search" }}
-        />
-      </Search>
-      <button className=" border-l-0 px-3 py-2 bg-red-500 text-white rounded-r-lg ">
-        Search
-      </button>
-    </div>
+      <div className="navbar border-b-2 flex justify-between items-center px-4">
+        <div className="nav-logo">
+          <img src="./images/logo.png" className="w-24" alt="logo" />
+          <a className="no-underline" href="/">
+            <p>INDUSNET</p>
+          </a>
+        </div>
+        <div className="flex">
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search Product, Category, Brand…"
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Search>
+          <button className=" border-l-0 px-3 py-2 bg-red-500 text-white rounded-r-lg ">
+            Search
+          </button>
+        </div>
 
-    <div className="nav-login-cart flex gap-4">
-      <Link to="/login">
-        <button>Login Now</button>
-      </Link>
-      <button onClick={handleOpenTrackOrder} className="border-0 border-white">
-        Track Order
-      </button>
-      <TrackOrder open={showTrackOrder} handleClose={handleCloseTrackOrder} />
-      <Link to="/profile">
-        <img src={profileicon} className="h-[4rem]" alt="profile" />
-      </Link>
-      <Link to="/cart">
-        <img src="./images/cart.jpg" className="h-12" alt="cart" />
-      </Link>
-      <div className="nav-cart-count">{cartdata.length}</div>
-    </div>
-  </div>
-  {showList && (
-    <div>
-      <div
-        className={
-          location.pathname === "/"
-            ? "sticky-navbar sticky top-20 z-40 bg-white py-0 px-9 border-b-[1px] "
-            : "sticky-navbar sticky top-5 z-40 bg-white py-0 px-9"
-        }
-      >
-        <ul className="list-none flex justify-between gap-[1rem] px-3 py-2">
-          <a href="" className="no-underline text-black">
-            <li onClick={() => setMennu("safety_tool")}>
-              <Link to="/safety_tool" className="no-underline text-black" onClick={scrollToTop}>
-                Safety
-              </Link>
-              {location.pathname === "/safety_tool" && <hr />}
-            </li>
-          </a>
-          <a href="" className="no-underline text-black">
-            <li onClick={() => setMennu("safety_tool")}>
-              <Link to="/electrical" className="no-underline text-black" onClick={scrollToTop}>
-                Electrical
-              </Link>
-              {location.pathname === "/electrical" && <hr />}
-            </li>
-          </a>
-          <li onClick={() => setMennu("construction_tool")}>
-            <Link to="/construction_tool" className="no-underline text-black" onClick={scrollToTop}>
-              Power Tools
-            </Link>
-            {location.pathname === "/construction_tool" && <hr />}
-          </li>
-          <li onClick={() => setMennu("pumps")}>
-            <Link to="/pumps" className="no-underline text-black" onClick={scrollToTop}>
-              Motors & pumps
-            </Link>
-            {location.pathname === "/pumps" && <hr />}
-          </li>
-          <a href="" className="no-underline text-black">
-            <li onClick={() => setMennu("agricultural_tool")}>
-              <Link to="/agricultural_tool" className="no-underline text-black" onClick={scrollToTop}>
-                Gardening Tools
-              </Link>
-              {location.pathname === "/agricultural_tool" && <hr />}
-            </li>
-          </a>
-          <li onClick={() => setMennu("MedicalSupplies")}>
-            <Link to="/MedicalSupplies" className="no-underline text-black" onClick={scrollToTop}>
-              Medical Supplies
-            </Link>
-            {location.pathname === "/MedicalSupplies" && <hr />}
-          </li>
-        </ul>
+        <div className="nav-login-cart flex gap-4">
+          <Link to="/login">
+            <button>Login Now</button>
+          </Link>
+          <button
+            onClick={handleOpenTrackOrder}
+            className="border-0 border-white"
+          >
+            Track Order
+          </button>
+          <TrackOrder
+            open={showTrackOrder}
+            handleClose={handleCloseTrackOrder}
+          />
+          <Link to="/profile">
+            <img src={profileicon} className="h-[4rem]" alt="profile" />
+          </Link>
+          <Link to="/cart">
+            <img src="./images/cart.jpg" className="h-12" alt="cart" />
+          </Link>
+          <div className="nav-cart-count">{cartdata.length}</div>
+        </div>
       </div>
+      {showList && (
+        <div>
+          <div
+            className={
+              location.pathname === "/"
+                ? "sticky-navbar sticky top-20 z-40 bg-white py-0 px-9 border-b-[1px] "
+                : "sticky-navbar sticky top-5 z-40 bg-white py-0 px-9"
+            }
+          >
+            <ul className="list-none flex justify-between gap-[1rem] px-3 py-2">
+              <a href="" className="no-underline text-black">
+                <li onClick={() => setMennu("safety_tool")}>
+                  <Link
+                    to="/safety_tool"
+                    className="no-underline text-black"
+                    onClick={scrollToTop}
+                  >
+                    Safety
+                  </Link>
+                  {location.pathname === "/safety_tool" && <hr />}
+                </li>
+              </a>
+              <a href="" className="no-underline text-black">
+                <li onClick={() => setMennu("safety_tool")}>
+                  <Link
+                    to="/electrical"
+                    className="no-underline text-black"
+                    onClick={scrollToTop}
+                  >
+                    Electrical
+                  </Link>
+                  {location.pathname === "/electrical" && <hr />}
+                </li>
+              </a>
+              <li onClick={() => setMennu("construction_tool")}>
+                <Link
+                  to="/construction_tool"
+                  className="no-underline text-black"
+                  onClick={scrollToTop}
+                >
+                  Power Tools
+                </Link>
+                {location.pathname === "/construction_tool" && <hr />}
+              </li>
+              <li onClick={() => setMennu("pumps")}>
+                <Link
+                  to="/pumps"
+                  className="no-underline text-black"
+                  onClick={scrollToTop}
+                >
+                  Motors & pumps
+                </Link>
+                {location.pathname === "/pumps" && <hr />}
+              </li>
+              <a href="" className="no-underline text-black">
+                <li onClick={() => setMennu("agricultural_tool")}>
+                  <Link
+                    to="/agricultural_tool"
+                    className="no-underline text-black"
+                    onClick={scrollToTop}
+                  >
+                    Gardening Tools
+                  </Link>
+                  {location.pathname === "/agricultural_tool" && <hr />}
+                </li>
+              </a>
+              <li onClick={() => setMennu("MedicalSupplies")}>
+                <Link
+                  to="/MedicalSupplies"
+                  className="no-underline text-black"
+                  onClick={scrollToTop}
+                >
+                  Medical Supplies
+                </Link>
+                {location.pathname === "/MedicalSupplies" && <hr />}
+              </li>
+            </ul>
+          </div>
+        </div>
+      )}
     </div>
-  )}
-</div>
   );
 }
